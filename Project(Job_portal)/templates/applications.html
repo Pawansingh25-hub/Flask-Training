@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Applications{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Applications List</h2>
+    <a href="/admin/dashboard" class="btn btn-secondary">Back</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for a in apps %}
+        <tr>
+            <td>{{ a.name }}</td>
+            <td>{{ a.email }}</td>
+            <td>{{ a.phone }}</td>
+            <td>{{ a.job.title }}</td>
+            <td>
+                <span class="badge bg-info">{{ a.status }}</span>
+            </td>
+
+            <td>
+                <form method="POST" action="/admin/update_status/{{ a.id }}">
+                    <select name="status" class="form-select mb-2">
+                        <option value="Pending">Pending</option>
+                        <option value="Selected">Selected</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-success btn-sm w-100">Update</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if apps|length == 0 %}
+<div class="alert alert-warning text-center">
+    No applications found.
+</div>
+{% endif %}
+
+{% endblock %}

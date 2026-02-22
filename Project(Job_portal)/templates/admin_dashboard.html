@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Admin Dashboard</h2>
+    <a href="/admin/logout" class="btn btn-danger">Logout</a>
+</div>
+
+<div class="mb-3">
+    <a href="/admin/add_job" class="btn btn-primary">+ Add Job</a>
+    <a href="/admin/applications" class="btn btn-success">View Applications</a>
+</div>
+
+<hr>
+
+<h4>Job Listings</h4>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.id }}</td>
+            <td>{{ job.title }}</td>
+            <td>{{ job.company }}</td>
+            <td>{{ job.location }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

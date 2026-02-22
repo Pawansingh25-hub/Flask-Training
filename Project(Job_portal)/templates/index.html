@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">Available Jobs</h2>
+
+<div class="row">
+    {% for job in jobs %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ job.title }}</h5>
+                <p class="card-text">
+                    <b>Company:</b> {{ job.company }} <br>
+                    <b>Location:</b> {{ job.location }}
+                </p>
+                <p class="card-text text-muted">{{ job.description[:100] }}...</p>
+
+                <a href="/apply/{{ job.id }}" class="btn btn-primary w-100">Apply Now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if jobs|length == 0 %}
+<div class="alert alert-warning text-center">
+    No jobs available right now.
+</div>
+{% endif %}
+
+{% endblock %}
